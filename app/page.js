@@ -7,11 +7,11 @@ const skillData = [
   { name: "JavaScript", value: 90 },
   { name: "HTML/CSS", value: 90 },
   { name: "TypeScript", value: 65 },
-  { name: "Python", value: 40 },
+  { name: "Django", value: 40 },
   { name: "Next.js", value: 85 },
   { name: "React", value: 90 },
   { name: "Tailwind CSS", value: 90 },
-  { name: "Figma", value: 70 },
+  { name: "Reflex Python", value: 70 },
   { name: "Framer Motion", value: 70 },
   { name: "Git & GitHub", value: 85 },
 ];
@@ -138,20 +138,41 @@ export default function Home() {
       <section className="py-16 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-gray-700 pb-2">Portfolio</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[1, 2, 3].map((project) => (
+          {[
+            {
+              title: "Interactive Website for E-commerce",
+              description: "A fully responsive e-commerce website with an intuitive UI and shopping cart system.",
+              imageUrl: "/boutique.png"
+            },
+            {
+              title: "Interactive Website for an Acting Agency",
+              description: "A website that showcases acting talents with a modern design and booking system.",
+              imageUrl: "cadence.png"
+            },
+            {
+              title: "Test Taking Platform",
+              description: "A modern, minimalist test-taking webapp for students for an online course.",
+              imageUrl: "bmg.png"
+            }
+          ].map((project, index) => (
             <div
-              key={project}
+              key={index}
               className="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-700 hover:border-cyan-400 transition duration-300"
             >
-              <div className="h-48 bg-gradient-to-tr from-cyan-500/10 via-cyan-500/20 to-cyan-500/10"></div>
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-48 object-cover"
+              />
               <div className="p-4">
-                <h3 className="text-lg font-bold text-cyan-300">Project {project}</h3>
-                <p className="text-gray-400 text-sm">Modern and interactive project showcase.</p>
+                <h3 className="text-lg font-bold text-cyan-300">{project.title}</h3>
+                <p className="text-gray-400 text-sm">{project.description}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
+
 
       {/* Contact */}
       <section className="py-16 max-w-4xl mx-auto text-center">
@@ -198,10 +219,10 @@ export default function Home() {
         </form>
 
         <div className="flex justify-center gap-6 text-2xl mt-10">
-          <a href="mailto:robertkelly@futuristicdev.com" className="hover:text-cyan-400">
+          <a href="mailto:rokeow@gmail.com" className="hover:text-cyan-400">
             <Mail />
           </a>
-          <a href="https://github.com/robertkelly" className="hover:text-cyan-400">
+          <a href="https://github.com/rokeowmaster" className="hover:text-cyan-400">
             <Github />
           </a>
           <a href="https://linkedin.com/in/robertkelly" className="hover:text-cyan-400">
