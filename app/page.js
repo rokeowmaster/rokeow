@@ -1,103 +1,219 @@
-import Image from "next/image";
+"use client";
+import React, { useState } from "react";
+import { Github, Linkedin, Mail } from "lucide-react";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+
+const skillData = [
+  { name: "JavaScript", value: 90 },
+  { name: "HTML/CSS", value: 90 },
+  { name: "TypeScript", value: 65 },
+  { name: "Python", value: 40 },
+  { name: "Next.js", value: 85 },
+  { name: "React", value: 90 },
+  { name: "Tailwind CSS", value: 90 },
+  { name: "Figma", value: 70 },
+  { name: "Framer Motion", value: 70 },
+  { name: "Git & GitHub", value: 85 },
+];
+
+const COLORS = ["#06b6d4", "#3b82f6", "#10b981", "#facc15", "#f472b6"];
+
+const SkillChart = ({ name, value }) => {
+  const [count, setCount] = useState(0);
+
+  React.useEffect(() => {
+    let start = 0;
+    const end = value;
+    const duration = 1000;
+    const increment = end / (duration / 10);
+
+    const counter = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        clearInterval(counter);
+        setCount(end);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 10);
+
+    return () => clearInterval(counter);
+  }, [value]);
+
+  return (
+    <div className="flex flex-col items-center">
+      <ResponsiveContainer width={100} height={100}>
+        <PieChart>
+          <Pie
+            data={[{ name, value }, { name: "Remaining", value: 100 - value }]}
+            innerRadius={30}
+            outerRadius={40}
+            dataKey="value"
+            startAngle={90}
+            endAngle={-270}
+          >
+            <Cell key="filled" fill="#06b6d4" />
+            <Cell key="empty" fill="#1f2937" />
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+      <div className="text-sm text-gray-300 mt-2 text-center">
+        <p>{name}</p>
+        <p className="text-cyan-400 font-bold">{count}%</p>
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    window.open(
+      `https://wa.me/254758490103?text=Name:%20${encodeURIComponent(form.name)}%0AEmail:%20${encodeURIComponent(form.email)}%0AMessage:%20${encodeURIComponent(form.message)}`,
+      "_blank"
+    );
+  };
+
+  return (
+    <main className="bg-gradient-to-br from-black via-gray-900 to-gray-950 text-white min-h-screen p-6 font-sans">
+      {/* Hero Section */}
+      <section className="flex flex-col items-center justify-center text-center py-20 relative">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-80 h-80 bg-cyan-500 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+        <h1 className="text-5xl md:text-7xl font-bold mb-4 drop-shadow-md z-10">
+          Robert Kelly
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-300 max-w-xl z-10">
+          Futuristic Web Designer & Developer | UI/UX | Next.js & Tailwind Expert
+        </p>
+      </section>
+
+      {/* About Section */}
+      <section className="py-16 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-gray-700 pb-2">About Me</h2>
+        <p className="text-gray-300 leading-loose text-lg">
+          I'm a passionate web designer and developer focused on crafting visually compelling and futuristic digital experiences. I specialize in building responsive, high-performance, and user-centric web applications using Next.js, Tailwind CSS, and modern JavaScript.
+        </p>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-16 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-gray-700 pb-2">Skills</h2>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+          {skillData.map((skill, i) => (
+            <SkillChart key={i} name={skill.name} value={skill.value} />
+          ))}
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="py-16 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-gray-700 pb-2">Services</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            "Web Design",
+            "Frontend Development",
+            "UI/UX Design",
+            "Responsive Design",
+            "Brand Identity",
+            "Performance Optimization"
+          ].map((service, i) => (
+            <div
+              key={i}
+              className="bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-cyan-400 transform hover:scale-105 transition duration-300"
+            >
+              <h3 className="text-xl font-semibold mb-2 text-cyan-300">{service}</h3>
+              <p className="text-gray-400 text-sm">
+                High-quality {service.toLowerCase()} solutions tailored to meet your needs.
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Portfolio */}
+      <section className="py-16 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-gray-700 pb-2">Portfolio</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[1, 2, 3].map((project) => (
+            <div
+              key={project}
+              className="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-700 hover:border-cyan-400 transition duration-300"
+            >
+              <div className="h-48 bg-gradient-to-tr from-cyan-500/10 via-cyan-500/20 to-cyan-500/10"></div>
+              <div className="p-4">
+                <h3 className="text-lg font-bold text-cyan-300">Project {project}</h3>
+                <p className="text-gray-400 text-sm">Modern and interactive project showcase.</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="py-16 max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-gray-700 pb-2">Contact</h2>
+        <p className="text-gray-300 mb-6">Have a project in mind? Let's collaborate!</p>
+
+        {/* Glassy Contact Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-cyan-500 max-w-xl mx-auto shadow-xl"
+        >
+          <input
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            className="w-full mb-4 p-3 rounded-md bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            className="w-full mb-4 p-3 rounded-md bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            required
+          />
+          <textarea
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            placeholder="Your Message"
+            className="w-full mb-6 p-3 h-32 rounded-md bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            required
+          ></textarea>
+          <button
+            type="submit"
+            className="w-full py-3 px-6 rounded-md bg-cyan-500 hover:bg-cyan-600 text-white font-semibold transition duration-300"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            Send via WhatsApp
+          </button>
+        </form>
+
+        <div className="flex justify-center gap-6 text-2xl mt-10">
+          <a href="mailto:robertkelly@futuristicdev.com" className="hover:text-cyan-400">
+            <Mail />
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+          <a href="https://github.com/robertkelly" className="hover:text-cyan-400">
+            <Github />
+          </a>
+          <a href="https://linkedin.com/in/robertkelly" className="hover:text-cyan-400">
+            <Linkedin />
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center text-gray-600 text-sm py-10">
+        &copy; {new Date().getFullYear()} Robert Kelly. All rights reserved.
       </footer>
-    </div>
+    </main>
   );
 }

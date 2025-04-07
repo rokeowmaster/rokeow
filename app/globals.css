@@ -20,7 +20,24 @@
 }
 
 body {
-  background: var(--background);
+  @apply bg-black text-white overflow-x-hidden;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fade-in-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-left { animation: slide-in-left 1s ease-out forwards; }
+.animate-slide-right { animation: slide-in-right 1s ease-out forwards; }
+.animate-fade-up { animation: fade-in-up 1s ease-out forwards; }
