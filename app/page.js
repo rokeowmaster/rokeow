@@ -142,17 +142,20 @@ export default function Home() {
             {
               title: "Interactive Website for E-commerce",
               description: "A fully responsive e-commerce website with an intuitive UI and shopping cart system.",
-              imageUrl: "/boutique.png"
+              imageUrl: "/boutique.png",
+              link:"https://boutique-rho.vercel.app"
             },
             {
               title: "Interactive Website for an Acting Agency",
               description: "A website that showcases acting talents with a modern design and booking system.",
-              imageUrl: "cadence.png"
+              imageUrl: "cadence.png",
+              link:"https://cadence-rust.vercel.app"
             },
             {
               title: "Test Taking Platform",
               description: "A modern, minimalist test-taking webapp for students for an online course.",
-              imageUrl: "bmg.png"
+              imageUrl: "bmg.png",
+              link:"https://bmg-exams.vercel.app"
             }
           ].map((project, index) => (
             <div
@@ -167,6 +170,7 @@ export default function Home() {
               <div className="p-4">
                 <h3 className="text-lg font-bold text-cyan-300">{project.title}</h3>
                 <p className="text-gray-400 text-sm">{project.description}</p>
+                <a href={project.link} className="text-md text-cyan-400">Visit</a>
               </div>
             </div>
           ))}
