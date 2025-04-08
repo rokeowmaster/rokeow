@@ -218,7 +218,7 @@ export default function Home() {
             type="submit"
             className="w-full py-3 px-6 rounded-md bg-cyan-500 hover:bg-cyan-600 text-white font-semibold transition duration-300"
           >
-            Send via WhatsApp
+            Send
           </button>
         </form>
 
