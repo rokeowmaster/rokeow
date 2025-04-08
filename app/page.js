@@ -142,19 +142,19 @@ export default function Home() {
             {
               title: "Interactive Website for E-commerce",
               description: "A fully responsive e-commerce website with an intuitive UI and shopping cart system.",
-              imageUrl: "/boutique.png",
+              imageUrl: "/boutique.PNG",
               link:"https://boutique-rho.vercel.app"
             },
             {
               title: "Interactive Website for an Acting Agency",
               description: "A website that showcases acting talents with a modern design and booking system.",
-              imageUrl: "cadence.png",
+              imageUrl: "cadence.PNG",
               link:"https://cadence-rust.vercel.app"
             },
             {
               title: "Test Taking Platform",
               description: "A modern, minimalist test-taking webapp for students for an online course.",
-              imageUrl: "bmg.png",
+              imageUrl: "bmg.PNG",
               link:"https://bmg-exams.vercel.app"
             }
           ].map((project, index) => (
