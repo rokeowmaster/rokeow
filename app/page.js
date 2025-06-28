@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
+import PortfolioIntro from "@/components/PortfolioIntro";
+
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const skillData = [
+  { name: "Microsoft Office", value: 95 },
   { name: "JavaScript", value: 90 },
   { name: "HTML/CSS", value: 90 },
   { name: "TypeScript", value: 65 },
@@ -12,7 +15,6 @@ const skillData = [
   { name: "React", value: 90 },
   { name: "Tailwind CSS", value: 90 },
   { name: "Reflex Python", value: 70 },
-  { name: "Framer Motion", value: 70 },
   { name: "Git & GitHub", value: 85 },
 ];
 
@@ -87,7 +89,7 @@ export default function Home() {
           Robert Kelly
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 max-w-xl z-10">
-          Futuristic Web Designer & Developer | UI/UX | Next.js & Tailwind Expert
+          Futuristic Web Designer & Developer | IT Support Specialist
         </p>
       </section>
 
@@ -95,9 +97,10 @@ export default function Home() {
       <section className="py-16 max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-gray-700 pb-2">About Me</h2>
         <p className="text-gray-300 leading-loose text-lg">
-          I'm a passionate web designer and developer focused on crafting visually compelling and futuristic digital experiences. I specialize in building responsive, high-performance, and user-centric web applications using Next.js, Tailwind CSS, and modern JavaScript.
+          Detail‑oriented professional blending 3+ years of enterprise IT support with modern web development.
         </p>
       </section>
+      <PortfolioIntro />
 
       {/* Skills Section */}
       <section className="py-16 max-w-6xl mx-auto">
