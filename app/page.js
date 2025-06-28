@@ -86,7 +86,7 @@ export default function Home() {
       <section className="flex flex-col items-center justify-center text-center py-20 relative">
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-80 h-80 bg-cyan-500 rounded-full blur-3xl opacity-30 animate-pulse"></div>
         <h1 className="text-5xl md:text-7xl font-bold mb-4 drop-shadow-md z-10">
-          Robert Kelly
+          Robert Kelly Owako
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 max-w-xl z-10">
           Futuristic Web Designer & Developer | IT Support Specialist
